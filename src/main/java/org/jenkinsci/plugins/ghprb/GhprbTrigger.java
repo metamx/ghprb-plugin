@@ -43,6 +43,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
     private final Boolean onlyTriggerPhrase;
     private final Boolean useGitHubHooks;
     private final Boolean permitAll;
+    private int logExcerptLines = 0;
     private final Boolean mentionTestResults;
     private final Boolean mentionJenkinsDetails;
     private String whitelist;
@@ -61,6 +62,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
                         Boolean useGitHubHooks,
                         Boolean permitAll,
                         Boolean autoCloseFailedPullRequests,
+                        int logExcerptLines,
                         Boolean mentionTestResults,
                         Boolean mentionJenkinsDetails,
                         List<GhprbBranch> whiteListTargetBranches) throws ANTLRException {
@@ -75,6 +77,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
         this.permitAll = permitAll;
         this.autoCloseFailedPullRequests = autoCloseFailedPullRequests;
         this.whiteListTargetBranches = whiteListTargetBranches;
+        this.logExcerptLines = logExcerptLines;
         this.mentionTestResults = mentionTestResults;
         this.mentionJenkinsDetails = mentionJenkinsDetails;
     }
@@ -249,6 +252,11 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
 
   public boolean getMentionJenkinsDetails() {
     return mentionJenkinsDetails != null && mentionJenkinsDetails;
+  }
+
+  public int getlogExcerptLines()
+  {
+    return this.logExcerptLines;
   }
 
     public Boolean isAutoCloseFailedPullRequests() {

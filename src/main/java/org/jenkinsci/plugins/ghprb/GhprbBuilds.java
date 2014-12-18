@@ -182,7 +182,7 @@ public class GhprbBuilds {
                 }
             }
 
-            int numLines = GhprbTrigger.getDscp().getlogExcerptLines();
+            int numLines = trigger.getlogExcerptLines();
             if (state != GHCommitState.SUCCESS && numLines > 0) {
                 // on failure, append an excerpt of the build log
                 try {
