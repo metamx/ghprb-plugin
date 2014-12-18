@@ -120,12 +120,14 @@ public class GhprbBuilds {
                 msg.append(GhprbTrigger.getDscp().getMsgFailure());
             }
 
-            msg.append("\nRefer to this link for build results: ");
-            msg.append(publishedURL).append(build.getUrl());
+            if(trigger.getMentionJenkinsDetails()) {
+              msg.append("\nRefer to this link for build results: ");
+              msg.append(publishedURL).append(build.getUrl());
+              msg.append("\nBuilt on node: ");
+              msg.append(build.getBuiltOnStr());
+            }
             msg.append("\nBuild Duration: ");
             msg.append(build.getDurationString());
-            msg.append("\nBuilt on node: ");
-            msg.append(build.getBuiltOnStr());
 
             //If the name of the node name was empty, the node was the master
             if(build.getBuiltOnStr().equals("")){

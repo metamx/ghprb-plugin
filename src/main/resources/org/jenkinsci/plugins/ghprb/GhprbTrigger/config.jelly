@@ -20,6 +20,9 @@
 	</f:entry>
     <f:entry title="${%Mention Jenkins test results in status comment?}" field="mentionTestResults">
 	  <f:checkbox />
+  <f:entry title="${%Show Jenkins Details}" field="mentionJenkinsDetails">
+    <f:checkbox checked="True"/>
+  </f:entry>
 	</f:entry>
 	<f:entry title="${%Crontab line}" field="cron" help="/descriptor/hudson.triggers.TimerTrigger/help/spec">
 	  <f:textbox default="${descriptor.cron}" checkUrl="'descriptorByName/hudson.triggers.TimerTrigger/checkSpec?value=' + encodeURIComponent(this.value)"/>

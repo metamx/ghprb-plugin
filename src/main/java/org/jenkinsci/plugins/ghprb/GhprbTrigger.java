@@ -44,6 +44,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
     private final Boolean useGitHubHooks;
     private final Boolean permitAll;
     private final Boolean mentionTestResults;
+    private final Boolean mentionJenkinsDetails;
     private String whitelist;
     private Boolean autoCloseFailedPullRequests;
     private List<GhprbBranch> whiteListTargetBranches;
@@ -61,6 +62,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
                         Boolean permitAll,
                         Boolean autoCloseFailedPullRequests,
                         Boolean mentionTestResults,
+                        Boolean mentionJenkinsDetails,
                         List<GhprbBranch> whiteListTargetBranches) throws ANTLRException {
         super(cron);
         this.adminlist = adminlist;
@@ -74,6 +76,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
         this.autoCloseFailedPullRequests = autoCloseFailedPullRequests;
         this.whiteListTargetBranches = whiteListTargetBranches;
         this.mentionTestResults = mentionTestResults;
+        this.mentionJenkinsDetails = mentionJenkinsDetails;
     }
 
     public static GhprbTrigger extractTrigger(AbstractProject p) {
@@ -243,6 +246,11 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
 		return mentionTestResults != null && mentionTestResults;
 	}
 
+
+  public boolean getMentionJenkinsDetails() {
+    return mentionJenkinsDetails != null && mentionJenkinsDetails;
+  }
+
     public Boolean isAutoCloseFailedPullRequests() {
         if (autoCloseFailedPullRequests == null) {
             Boolean autoClose = getDescriptor().getAutoCloseFailedPullRequests();
@@ -286,7 +294,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
         return helper.getRepository();
     }
 
-    public static final class DescriptorImpl extends TriggerDescriptor {
+  public static final class DescriptorImpl extends TriggerDescriptor {
         // GitHub username may only contain alphanumeric characters or dashes and cannot begin with a dash
         private static final Pattern adminlistPattern = Pattern.compile("((\\p{Alnum}[\\p{Alnum}-]*)|\\s)*");
         private String serverAPIUrl = "https://api.github.com";
