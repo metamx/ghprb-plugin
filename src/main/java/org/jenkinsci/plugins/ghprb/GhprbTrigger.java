@@ -46,6 +46,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
     private int logExcerptLines = 0;
     private final Boolean mentionTestResults;
     private final Boolean mentionJenkinsDetails;
+    private final Boolean silentMode;
     private String whitelist;
     private Boolean autoCloseFailedPullRequests;
     private List<GhprbBranch> whiteListTargetBranches;
@@ -65,6 +66,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
                         int logExcerptLines,
                         Boolean mentionTestResults,
                         Boolean mentionJenkinsDetails,
+                        Boolean silentMode,
                         List<GhprbBranch> whiteListTargetBranches) throws ANTLRException {
         super(cron);
         this.adminlist = adminlist;
@@ -80,6 +82,7 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
         this.logExcerptLines = logExcerptLines;
         this.mentionTestResults = mentionTestResults;
         this.mentionJenkinsDetails = mentionJenkinsDetails;
+        this.silentMode = silentMode;
     }
 
     public static GhprbTrigger extractTrigger(AbstractProject p) {
@@ -243,7 +246,10 @@ public class GhprbTrigger extends Trigger<AbstractProject<?, ?>> {
     public Boolean getPermitAll() {
         return permitAll != null && permitAll;
     }
-    
+
+  public boolean getSilentMode() {
+    return silentMode != null && silentMode;
+  }
 
 	public boolean getMentionTestResults() {
 		return mentionTestResults != null && mentionTestResults;

@@ -143,7 +143,7 @@ public class GhprbRepository {
     }
 
     public void addComment(int id, String comment) {
-        if (comment.trim().isEmpty())
+        if (helper.isSilentMode() || comment.trim().isEmpty())
             return;
         try {
             ghRepository.getPullRequest(id).comment(comment);

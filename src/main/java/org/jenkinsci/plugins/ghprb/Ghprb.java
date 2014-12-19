@@ -91,6 +91,10 @@ public class Ghprb {
         return trigger.getDescriptor().getGitHub();
     }
 
+    public Boolean isSilentMode() {
+      return trigger.getSilentMode();
+    }
+
     void run() {
         repository.check();
     }
